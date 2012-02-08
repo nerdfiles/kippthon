@@ -1,2 +1,4 @@
 .authentication
 .auth
+*.swo
+*.swp
