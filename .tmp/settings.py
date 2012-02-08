@@ -20,7 +20,7 @@ DEFAULT_LANGUAGE = 0
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'dev-db.db'),
+        'NAME': os.path.join(PROJECT_DIR, 'mycms.db'),
     }
 }
 
@@ -125,4 +125,3 @@ INSTALLED_APPS = (
     'cms.plugins.googlemap',
     'sekizai',
 )
-
