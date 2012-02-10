@@ -34,15 +34,21 @@ USE_I18N = True
 
 USE_L10N = True
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+THEME = 'base'
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, '_themes', THEME, '_templates'),
+)
 
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR, '_themes', THEME, '_assets')
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
 
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+MEDIA_URL = '/_assets/'
+
+STATIC_URL = '/_static/'
+
+ADMIN_MEDIA_PREFIX = '/_static/admin/'
 
 SECRET_KEY = '0r6%7gip5tmez*vygfv+u14h@4lbt^8e2^26o#5_f_#b7%cm)u'
 
@@ -78,12 +84,6 @@ CMS_TEMPLATES = (
 )
 
 ROOT_URLCONF = 'urls'
-
-THEME = 'base'
-
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, '_themes', THEME, '_templates'),
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
