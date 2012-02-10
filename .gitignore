@@ -2,3 +2,4 @@
 .auth
 *.swo
 *.swp
+local_settings.py
