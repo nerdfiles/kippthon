@@ -73,7 +73,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 CMS_TEMPLATES = (
-    ('example.html', 'Example Template'),
+    # standard templates
+    ('base.html', 'Base Template'),
 )
 
 ROOT_URLCONF = 'urls'
