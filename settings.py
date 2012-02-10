@@ -79,8 +79,10 @@ CMS_TEMPLATES = (
 
 ROOT_URLCONF = 'urls'
 
+THEME = 'base'
+
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+    os.path.join(PROJECT_DIR, '_themes', THEME, '_templates'),
 )
 
 INSTALLED_APPS = (
