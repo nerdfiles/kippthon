@@ -106,3 +106,11 @@ INSTALLED_APPS = (
     'sekizai',
 )
 
+
+# == LOCAL ========================================= #
+
+try:
+  from local_settings import *
+except ImportError:
+  pass
+
