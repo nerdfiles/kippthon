@@ -20,16 +20,26 @@ try:
 except ImportError:
   pass
 
-def search(q=''):
-  url = 'https://kippt.com/api/search/clips/?limit=5&q=%s' % q
+def search(limit='5', q=''):
+  url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
   r = urllib2.urlopen(req)
   obj = simplejson.loads(r.read())
   #pprint( obj )
-  for item in obj['objects']:
-    print item['title']
+  print '\nYour search query: %s' % sys.argv[2]
+  print '------\n'
+  for idx, item in enumerate(obj['objects']):
+    if item['notes']:
+      print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
+    else:
+      print '%s. %s' % ((idx+1), item['title'],)
+    print '%s' % item['url']
+    if (idx+1) < len(obj['objects']):
+      print '------\n'
+    else:
+      print '\n'
 
 def lists():
   url = 'https://kippt.com/api/lists/?offset=0&limit=2'
@@ -42,7 +52,7 @@ def lists():
   pprint( obj )
 
 if (len(sys.argv) > 1):
-  search(q=sys.argv[1])
+  search(limit=sys.argv[1], q=sys.argv[2])
 else:
   lists()
 
