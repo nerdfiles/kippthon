@@ -8,7 +8,14 @@ import urllib2
 buf = cStringIO.StringIO()
 
 USER = 'nerdfiles'
-API_KEY = 'cb08721433031016984ebc269e4f07e0a1d8ce4b'
+
+
+# == LOCAL ======================================= #
+
+try:
+  from local_settings import *
+except ImportError:
+  pass
 
 def kippt():
   url = 'https://kippt.com/api/lists/'
