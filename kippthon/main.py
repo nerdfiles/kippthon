@@ -79,8 +79,8 @@ if not m:
 '''
   USAGE
 
-  1. kippt search:python+cms 2
-  2. kippt
+  1. $ kippt search:python+cms 2
+  2. $ kippt
 '''
 
 
