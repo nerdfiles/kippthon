@@ -41,14 +41,25 @@ def search(limit='5', q=''):
       print '\n'
 
 def lists():
-  url = 'https://kippt.com/api/lists/?offset=0&limit=2'
+  url = 'https://kippt.com/api/clips/?offset=0&limit=10'
   # provide @prop data for post
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
   r = urllib2.urlopen(req)
   obj = simplejson.loads(r.read())
-  pprint( obj )
+  #pprint( obj )
+  print '\n'
+  for idx, item in enumerate(obj['objects']):
+    if item['notes']:
+      print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
+    else:
+      print '%s. %s' % ((idx+1), item['title'],)
+    print '%s' % item['url']
+    if (idx+1) < len(obj['objects']):
+      print '------\n'
+    else:
+      print '\n'
 
 if (len(sys.argv) > 1):
   search(limit=sys.argv[1], q=sys.argv[2])
