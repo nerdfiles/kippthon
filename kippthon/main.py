@@ -27,7 +27,6 @@ def search(limit='5', q=''):
   req.add_header('X-Kippt-API-Token', API_KEY)
   r = urllib2.urlopen(req)
   obj = simplejson.loads(r.read())
-  #pprint( obj )
   print '\nYour search query: %s' % sys.argv[2]
   print '------\n'
   for idx, item in enumerate(obj['objects']):
