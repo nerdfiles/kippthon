@@ -63,6 +63,9 @@ def lists():
       print '\n'
 
 m = ''
+
+# bash no trim
+
 if len(sys.argv) > 1:
   q = sys.argv[1]
   p = re.compile("search\:")
