@@ -7,6 +7,7 @@ import cStringIO
 import urllib
 import urllib2
 import sys
+import re
 
 buf = cStringIO.StringIO()
 
@@ -61,9 +62,23 @@ def lists():
     else:
       print '\n'
 
-if (len(sys.argv) > 1):
-  search(limit=sys.argv[1], q=sys.argv[2])
-else:
+m = ''
+if len(sys.argv) > 1:
+  q = sys.argv[1]
+  p = re.compile("search\:")
+  m = p.match(q, 0)
+  q = q.replace("search:", "")
+  search(limit=sys.argv[2], q=q)
+
+if not m:
   lists()
+
+'''
+  USAGE
+
+  1. kippt search:python+cms 2
+  2. kippt
+'''
+
 
 
