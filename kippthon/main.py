@@ -12,7 +12,7 @@ API_KEY = 'cb08721433031016984ebc269e4f07e0a1d8ce4b'
 
 def kippt():
   url = 'https://kippt.com/api/lists/'
-  # provide @data for post
+  # provide @prop data for post
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
