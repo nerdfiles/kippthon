@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# == IMPORTS ======================================= #
+
 import pycurl
 from pprint import pprint
 import simplejson
@@ -9,10 +11,7 @@ import urllib2
 import sys
 import re
 
-buf = cStringIO.StringIO()
-
-USER = 'nerdfiles'
-
+# buf = cStringIO.StringIO()
 
 # == LOCAL ======================================= #
 
@@ -20,6 +19,14 @@ try:
   from local_settings import *
 except ImportError:
   pass
+
+# == SEARCH ======================================= #
+#
+# For searching bookmarks.
+#
+# USAGE:
+# 
+# $ kippt search:python+cms 2
 
 def search(limit='5', q=''):
   url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
@@ -40,6 +47,15 @@ def search(limit='5', q=''):
       print '------\n'
     else:
       print '\n'
+
+
+# == LIST ======================================= #
+#
+# Default behavior. 
+# 
+# USAGE:
+# 
+# $ kippt
 
 def lists():
   url = 'https://kippt.com/api/clips/?offset=0&limit=10'
@@ -62,9 +78,11 @@ def lists():
     else:
       print '\n'
 
-m = ''
+# == OUTPUT ===================================== #
+# 
+# Printing it
 
-# bash no trim
+m = ''
 
 if len(sys.argv) > 1:
   q = sys.argv[1]
@@ -76,12 +94,6 @@ if len(sys.argv) > 1:
 if not m:
   lists()
 
-'''
-  USAGE
-
-  1. $ kippt search:python+cms 2
-  2. $ kippt
-'''
 
 
 
