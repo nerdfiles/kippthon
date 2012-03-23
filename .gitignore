@@ -3,3 +3,4 @@
 *.swo
 *.swp
 local_settings.py
+*.pyc
