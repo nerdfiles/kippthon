@@ -52,8 +52,13 @@ def search(limit='5', q=''):
         else:
           print '\n'
   except URLError, e:
-    print '%s (%s)' % (e.msg, e.code,)
-    print e.url
+    print 'URL: %s' % e.url
+    if hasattr(e, 'reason'):
+      print 'ERROR: Could not reach server.'
+      print e.reason
+    elif hasattr(e, 'code'):
+      print 'ERROR: Could not fulfill request.'
+      print 'DETAILS: %s (%s)' % (e.msg, e.code,)
 
 # == LIST ======================================= #
 #
