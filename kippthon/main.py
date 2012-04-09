@@ -8,6 +8,7 @@ import simplejson
 import cStringIO
 import urllib
 import urllib2
+from urllib2 import *
 import sys
 import re
 
@@ -33,21 +34,26 @@ def search(limit='5', q=''):
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
-  r = urllib2.urlopen(req)
-  obj = simplejson.loads(r.read())
-  print '\nYour search query: %s' % sys.argv[2]
-  print '------\n'
-  for idx, item in enumerate(obj['objects']):
-    if item['notes']:
-      print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
-    else:
-      print '%s. %s' % ((idx+1), item['title'],)
-    print '%s' % item['url']
-    if (idx+1) < len(obj['objects']):
-      print '------\n'
-    else:
-      print '\n'
-
+  obj = None
+  try:
+    r = urllib2.urlopen(req)
+    obj = simplejson.loads(r.read())
+    print '\nYour search query: %s' % sys.argv[2]
+    print '------\n'
+    if obj is not None:
+      for idx, item in enumerate(obj['objects']):
+        if item['notes']:
+          print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
+        else:
+          print '%s. %s' % ((idx+1), item['title'],)
+        print '%s' % item['url']
+        if (idx+1) < len(obj['objects']):
+          print '------\n'
+        else:
+          print '\n'
+  except URLError, e:
+    print e.msg
+    print e.url
 
 # == LIST ======================================= #
 #
