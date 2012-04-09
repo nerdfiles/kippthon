@@ -52,7 +52,7 @@ def search(limit='5', q=''):
         else:
           print '\n'
   except URLError, e:
-    print e.msg
+    print '%s (%s)' % (e.msg, e.code,)
     print e.url
 
 # == LIST ======================================= #
