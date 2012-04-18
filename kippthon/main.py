@@ -31,7 +31,9 @@ l = sys.argv[2:] # limit
 
 
 # == KIPPT CLI ================================= #
-# 
+#
+# Call Kippt.
+#
 # @usage
 #
 # $ kippt
@@ -41,8 +43,12 @@ if not u:
   sys.exit(1)
 
 
-# == SEARCH ==================================== #
+# == KIPPT SEARCH ============================== #
 # 
+# Search your bookmarks.
+#
+# @param        query (expects string; e.g., 'some string', "some string", some+string)
+# @param        num (expects int; e.g., 5)
 # @usage
 #
 # $ kippt search:[query] [num]
@@ -86,6 +92,7 @@ if 'search:' in u[0]:
 
 # == LISTS ===================================== #
 #
+# @param        num (expects int; e.g., 20)
 # @usage
 #
 # $ kippt lists [num]
