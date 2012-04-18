@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+# == IMPORTS =================================== #
+
 import pycurl
 from pprint import pprint
 import simplejson
@@ -8,20 +12,26 @@ from urllib2 import *
 import sys
 import re
 
-# == LOCAL ======================================= #
+# == LOCAL ===================================== #
 
 try:
   from local_settings import *
 except ImportError:
   pass
 
-# == SEARCH ======================================= #
-#
-# For searching bookmarks.
-#
-# USAGE:
-# 
-# $ kippt search:python+cms 2
+
+# == TOOLS ===================================== #
+
+''' 
+
+  kippt search
+
+  search for kippt bookmarks
+
+  @date     04-17-2012
+  @author   nerdfiles
+
+'''
 
 def search(limit='5', q=''):
   url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
@@ -33,8 +43,8 @@ def search(limit='5', q=''):
   try:
     r = urllib2.urlopen(req)
     obj = simplejson.loads(r.read())
-    if len(sys.argv) > 2:
-      o += '\nYour search query: %s' % sys.argv[2]
+    if q != '':
+      o += '\nYour search query: %s' % q
       o += '\n\n------\n\n'
     if obj is not None:
       for idx, item in enumerate(obj['objects']):
@@ -57,13 +67,17 @@ def search(limit='5', q=''):
       o += 'ERROR: Could not fulfill request.'
       o += 'DETAILS: %s (%s)' % (e.msg, e.code,)
 
-# == LIST ======================================= #
-#
-# Default behavior. 
-# 
-# USAGE:
-# 
-# $ kippt
+
+'''
+
+  kippt lists
+
+  print lists from kippt
+
+  @date 04-17-2012
+  @author nerdfiles 
+
+'''
 
 def lists(limit=10):
   url = 'https://kippt.com/api/clips/?offset=0&limit='+str(limit)
