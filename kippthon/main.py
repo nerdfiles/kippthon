@@ -12,7 +12,6 @@ from urllib2 import *
 import sys
 import re
 from tools import *
-
 # buf = cStringIO.StringIO()
 
 # == LOCAL ======================================= #
@@ -22,7 +21,8 @@ try:
 except ImportError:
   pass
 
-# search
+# == SEARCH ====================================== #
+#
 # @usage 
 # 
 # $ kippt search:some+thought+of+yours
@@ -30,38 +30,57 @@ except ImportError:
 
 m = ''
 
-if len(sys.argv) == 3:
+if len(sys.argv) > 2:
   q = sys.argv[1]
   p = re.compile('search\:')
   m = p.match(q, 0)
-  q = q.replace('search:', '')
-  num = sys.argv[2]
-  if num:
-    num = int(sys.argv[2])
+  l = sys.argv[2]
+
+  # grab "search:" text
+  #
+  # @idea consider names: as interfaces to webapp/urls
+  # @example $ merch:   # looks in a particular app or network of apps
+
+  if q.startswith('search:'):
+    q = q.replace('search:', '')
+    q = q.replace(' ', '+')
+    num = int(l)
     print '' + str(num) + ' results coming up...'
     print '------'
-    search(limit=sys.argv[2], q=q)
-  lists()
-  sys.exit(1)
+    search(limit=l, q=q)
+    sys.exit(1)
+
+if len(sys.argv) > 1:
+  q = sys.argv[1]
+  if q.startswith('search:'):
+    q = q.replace('search:','')
+    q = q.replace(' ', '+')
+    search(limit=10, q=q)
+    sys.exit(1)
 
 # lists
 # @usage 
 # $ kippt lists 
 
-if len(sys.argv) == 2:
+if len(sys.argv) > 2:
 
   print 'Warily not, pity...'
 
-  q = sys.argv[1]
+  u = sys.argv[1] # @assume 'lists'
+  l = sys.argv[2] # limit
 
-  if q == 'lists':
+  if u == 'lists' and l:
+    lists(l)
+    sys.exit(1)
+
+if len(sys.argv) > 1:
+  u = sys.argv[1]
+  if u == 'lists':
     lists()
-
-  sys.exit(1)
 
 #if not m:
 args = sys.argv
-if not args:
+if len(args) < 2:
   print 'usage: [--todir dir] logfile '
   sys.exit(1)
 

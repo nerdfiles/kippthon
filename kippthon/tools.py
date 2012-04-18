@@ -1,3 +1,20 @@
+import pycurl
+from pprint import pprint
+import simplejson
+import cStringIO
+import urllib
+import urllib2
+from urllib2 import *
+import sys
+import re
+
+# == LOCAL ======================================= #
+
+try:
+  from local_settings import *
+except ImportError:
+  pass
+
 # == SEARCH ======================================= #
 #
 # For searching bookmarks.
@@ -15,8 +32,9 @@ def search(limit='5', q=''):
   try:
     r = urllib2.urlopen(req)
     obj = simplejson.loads(r.read())
-    print '\nYour search query: %s' % sys.argv[2]
-    print '------\n'
+    if len(sys.argv) > 2:
+      print '\nYour search query: %s' % sys.argv[2]
+      print '------\n'
     if obj is not None:
       for idx, item in enumerate(obj['objects']):
         if item['notes']:
@@ -45,8 +63,8 @@ def search(limit='5', q=''):
 # 
 # $ kippt
 
-def lists():
-  url = 'https://kippt.com/api/clips/?offset=0&limit=10'
+def lists(limit=10):
+  url = 'https://kippt.com/api/clips/?offset=0&limit='+str(limit)
   # provide @prop data for post
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
