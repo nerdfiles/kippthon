@@ -151,32 +151,25 @@ if '--version' in args or '-v' in args:
 
 if '--help' in args or '-h' in args:
   print ''' 
-# Kippt CLI Help
-
-## Print most recent saves to Kippt
----
-$ kippt lists
-
-## Print most recent saves to Kippt and limit result set
----
-$ kippt lists 5
-
-## Search phrase
----
-$ kippt search:'something phrase'
-
-## Or (with double quotes):
----
-$ kippt search:"another phrase"
-
-## Or:
----
-$ kippt search:another+phrase
-
-## Search phrase and limit result set
----
-$ kippt search:"something many" 10
-
+ -----------------------------------------------------
+|                                                     |
+|                    Kippt CLI Help                   |
+|                                                     |
+| Lists usage examples                                |
+| ---------------------                               |
+|                                                     |
+| 1. $ kippt lists                                    |
+| 2. $ kippt lists 5                                  |
+|                                                     |
+| Search usage examples                               |
+| ---------------------                               |
+|                                                     |
+| 1. $ kippt search:'something phrase'                |
+| 2. $ kippt search:"another phrase"                  |
+| 3. $ kippt search:another+phrase                    |
+| 4. $ kippt search:"something many" 10               |
+|                                                     |
+ -----------------------------------------------------
 '''
   sys.exit(1)
 
