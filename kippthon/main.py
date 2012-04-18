@@ -34,6 +34,9 @@ l = sys.argv[2:] # limit
 #
 # Call Kippt.
 #
+# @date         04-17-2012
+# @author       nerdfiles
+#
 # @usage
 #
 # $ kippt
@@ -47,8 +50,12 @@ if not u:
 # 
 # Search your bookmarks.
 #
+# @date         04-17-2012
+# @author       nerdfiles
+#
 # @param        query (expects string; e.g., 'some string', "some string", some+string)
 # @param        num (expects int; e.g., 5)
+#
 # @usage
 #
 # $ kippt search:[query] [num]
@@ -92,7 +99,11 @@ if 'search:' in u[0]:
 
 # == LISTS ===================================== #
 #
+# @date         04-17-2012
+# @author       nerdfiles
+#
 # @param        num (expects int; e.g., 20)
+#
 # @usage
 #
 # $ kippt lists [num]
@@ -107,6 +118,9 @@ if 'lists' in u[0]:
 
 # == VERSION =================================== #
 #
+# @date         04-17-2012
+# @author       nerdfiles
+#
 # @usage
 #
 # $ kippt [--version|-v]
@@ -117,6 +131,9 @@ if '--version' in args or '-v' in args:
 
 
 # == HELP ====================================== #
+#
+# @date         04-17-2012
+# @author       nerdfiles
 #
 # @usage
 #
