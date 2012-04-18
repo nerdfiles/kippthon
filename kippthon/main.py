@@ -43,15 +43,16 @@ l = sys.argv[2:] # limit
 
 if not u:
   print '''
-# ============================================== #
-#                                                #
-#                   Kippt CLI                    #
-#                                                #
-# @see      https://kippt.com/api/               #
-# @help     $ kippt [--help|-h]                  #
-# @version  $ kippt [--version|-v]               #
-#                                                #
-# ============================================== #
+ =====================================================
+|                                                     |
+|                   Kippt CLI                         |
+|                                                     |
+| @see      https://kippt.com/api/                    |
+| @repo     https://github.com/nerdfiles/kippthon/    |
+| @help     $ kippt [--help|-h]                       |
+| @version  $ kippt [--version|-v]                    |
+|                                                     |
+ =====================================================
 '''
   sys.exit(1)
 
