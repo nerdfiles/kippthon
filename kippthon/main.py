@@ -21,6 +21,9 @@ try:
 except ImportError:
   pass
 
+u = sys.argv[1:] # @assume 'lists'
+l = sys.argv[2:] # limit
+
 # == SEARCH ====================================== #
 #
 # @usage 
@@ -34,7 +37,6 @@ if len(sys.argv) > 2:
   q = sys.argv[1:]
   #p = re.compile('search\:')
   #m = p.match(q, 0)
-  l = sys.argv[2:]
 
   # grab "search:" text
   #
@@ -70,30 +72,22 @@ if len(sys.argv) > 1:
 # @usage 
 # $ kippt lists [num]
 
-if len(sys.argv) > 2:
-
-  print 'Warily not, pity...'
-
-  u = sys.argv[1:] # @assume 'lists'
-  l = sys.argv[2:] # limit
-  l = int(l[0])
-  if 'lists' in u and l > 0:
-    print lists(l)
-    sys.exit(1)
+if 'lists' in u and l and l[0] > 0:
+  print lists(l[0])
+  sys.exit(1)
 
 # lists
 # @usage
 # $ kippt lists
 
-if len(sys.argv) > 1:
-  u = sys.argv[1:]
-  if 'lists' in u:
-    print lists()
-    sys.exit(1)
+#if len(sys.argv) > 1:
+if 'lists' in u:
+  print lists()
+  sys.exit(1)
 
 #if not m:
 args = sys.argv
-if len(args) < 2:
+if '--help' in args:
   print ''' 
  -------------------------------------------------------------
 |                                                             |
