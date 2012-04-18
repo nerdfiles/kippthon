@@ -12,7 +12,35 @@
 <body>
 {% cms_toolbar %}
 {% placeholder "main" %}
-{{ results }}
+<!-- {{ results.meta }} -->
+<dl>
+  <dt>Query</dt>
+  <dd>{{ results.meta.query }}</dd>
+  <dt>Total</dt>
+  <dd>{{ results.meta.total_count }}</dd>
+  <dt>Next</dt>
+  <dd><a href="https://kippt.com{{ results.meta.next }}">Next</a></dd>
+  {% if results.meta.previous %}
+  <dt>Previous</dt>
+  <dd><a href="https://kippt.com{{ results.meta.previous }}">Previous</a></dd>
+  {% endif %}
+</dl>
+
+<ul>
+{% for o in results.objects %}
+<!-- 
+  {{ o }}
+-->
+<li>
+<a href="{{ o.url }}" title="{{ o.title }}">{{ o.title }}</a> | 
+<a href="http://{{ o.url_domain }}">domain</a> | 
+<a href="http://kippt.com{{ o.resource_uri }}">json</a>
+{% if o.notes %}
+<p>{{ o.notes }}</p>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
 {% render_block "js" %}
 </body>
 </html>
