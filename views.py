@@ -11,5 +11,5 @@ def render_response(req, *args, **kwargs):
   return render_to_response(*args, **kwargs)
 
 def kippt(self):
-  #print lists()
+  print search(10, 'python')
   return render_response(self, '')

@@ -33,7 +33,7 @@ except ImportError:
 
 '''
 
-def search(limit='5', q=''):
+def search_cli(limit='5', q=''):
   url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
@@ -79,7 +79,7 @@ def search(limit='5', q=''):
 
 '''
 
-def lists(limit=10):
+def lists_cli(limit=10):
   url = 'https://kippt.com/api/clips/?offset=0&limit='+str(limit)
   # provide @prop data for post
   req = urllib2.Request(url=url)

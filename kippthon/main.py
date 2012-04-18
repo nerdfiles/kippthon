@@ -90,7 +90,7 @@ if 'search:' in u[0] and l and int(l[0]) > 0:
 
   print '' + str(num) + ' results coming up...'
   print '------'
-  print search(limit=l[0], q=q)
+  print search_cli(limit=l[0], q=q)
   sys.exit(1)
 
 # search
@@ -103,7 +103,7 @@ if 'search:' in u[0]:
     if q == '':
       print 'For?'
       sys.exit(1)
-    print search(limit=10, q=q)
+    print search_cli(limit=10, q=q)
     sys.exit(1)
 
 
@@ -119,11 +119,11 @@ if 'search:' in u[0]:
 # $ kippt lists [num]
 
 if 'lists' in u[0] and l and l[0] > 0:
-  print lists(l[0])
+  print lists_cli(l[0])
   sys.exit(1)
 
 if 'lists' in u[0]:
-  print lists()
+  print lists_cli()
   sys.exit(1)
 
 # == VERSION =================================== #
