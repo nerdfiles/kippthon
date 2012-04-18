@@ -29,31 +29,33 @@ def search(limit='5', q=''):
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
   obj = None
+  o = ''
   try:
     r = urllib2.urlopen(req)
     obj = simplejson.loads(r.read())
     if len(sys.argv) > 2:
-      print '\nYour search query: %s' % sys.argv[2]
-      print '------\n'
+      o += '\nYour search query: %s' % sys.argv[2]
+      o += '\n\n------\n\n'
     if obj is not None:
       for idx, item in enumerate(obj['objects']):
         if item['notes']:
-          print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
+          o += '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
         else:
-          print '%s. %s' % ((idx+1), item['title'],)
-        print '%s' % item['url']
+          o += '%s. %s' % ((idx+1), item['title'],)
+        o += '\n[%s]' % item['url']
         if (idx+1) < len(obj['objects']):
-          print '------\n'
+          o += '\n\n------\n\n'
         else:
-          print '\n'
+          o += '\n'
+    return o 
   except URLError, e:
-    print 'URL: %s' % e.url
+    o += 'URL: %s' % e.url
     if hasattr(e, 'reason'):
-      print 'ERROR: Could not reach server.'
-      print e.reason
+      o += 'ERROR: Could not reach server.'
+      o += e.reason
     elif hasattr(e, 'code'):
-      print 'ERROR: Could not fulfill request.'
-      print 'DETAILS: %s (%s)' % (e.msg, e.code,)
+      o += 'ERROR: Could not fulfill request.'
+      o += 'DETAILS: %s (%s)' % (e.msg, e.code,)
 
 # == LIST ======================================= #
 #
@@ -72,16 +74,17 @@ def lists(limit=10):
   r = urllib2.urlopen(req)
   obj = simplejson.loads(r.read())
   #pprint( obj )
-  print '\n'
+  o = '\n'
   for idx, item in enumerate(obj['objects']):
     if item['notes']:
-      print '''%s:
+      o += '''%s:
 %s. %s :: Note: %s''' % (item['list'], (idx+1), item['title'], item['notes'],)
     else:
-      print '''%s:
+      o += '''%s: 
 %s. %s''' % (item['list'], (idx+1), item['title'],)
-    print '%s' % item['url']
+    o += '\n[%s]' % item['url']
     if (idx+1) < len(obj['objects']):
-      print '------\n'
+      o += '\n\n------\n\n'
     else:
-      print '\n'
+      o += '\n'
+  return o
