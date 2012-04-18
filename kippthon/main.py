@@ -11,6 +11,7 @@ import urllib2
 from urllib2 import *
 import sys
 import re
+from tools import *
 
 # buf = cStringIO.StringIO()
 
@@ -21,90 +22,46 @@ try:
 except ImportError:
   pass
 
-# == SEARCH ======================================= #
+# search
+# @usage 
+# 
+# $ kippt search:some+thought+of+yours
 #
-# For searching bookmarks.
-#
-# USAGE:
-# 
-# $ kippt search:python+cms 2
-
-def search(limit='5', q=''):
-  url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
-  req = urllib2.Request(url=url)
-  req.add_header('X-Kippt-Username', USER)
-  req.add_header('X-Kippt-API-Token', API_KEY)
-  obj = None
-  try:
-    r = urllib2.urlopen(req)
-    obj = simplejson.loads(r.read())
-    print '\nYour search query: %s' % sys.argv[2]
-    print '------\n'
-    if obj is not None:
-      for idx, item in enumerate(obj['objects']):
-        if item['notes']:
-          print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
-        else:
-          print '%s. %s' % ((idx+1), item['title'],)
-        print '%s' % item['url']
-        if (idx+1) < len(obj['objects']):
-          print '------\n'
-        else:
-          print '\n'
-  except URLError, e:
-    print 'URL: %s' % e.url
-    if hasattr(e, 'reason'):
-      print 'ERROR: Could not reach server.'
-      print e.reason
-    elif hasattr(e, 'code'):
-      print 'ERROR: Could not fulfill request.'
-      print 'DETAILS: %s (%s)' % (e.msg, e.code,)
-
-# == LIST ======================================= #
-#
-# Default behavior. 
-# 
-# USAGE:
-# 
-# $ kippt
-
-def lists():
-  url = 'https://kippt.com/api/clips/?offset=0&limit=10'
-  # provide @prop data for post
-  req = urllib2.Request(url=url)
-  req.add_header('X-Kippt-Username', USER)
-  req.add_header('X-Kippt-API-Token', API_KEY)
-  r = urllib2.urlopen(req)
-  obj = simplejson.loads(r.read())
-  #pprint( obj )
-  print '\n'
-  for idx, item in enumerate(obj['objects']):
-    if item['notes']:
-      print '%s. %s :: Note: %s' % ((idx+1), item['title'], item['notes'],)
-    else:
-      print '%s. %s' % ((idx+1), item['title'],)
-    print '%s' % item['url']
-    if (idx+1) < len(obj['objects']):
-      print '------\n'
-    else:
-      print '\n'
-
-# == OUTPUT ===================================== #
-# 
-# Printing it
 
 m = ''
 
-if len(sys.argv) > 1:
+if len(sys.argv) == 3:
   q = sys.argv[1]
-  p = re.compile("search\:")
+  p = re.compile('search\:')
   m = p.match(q, 0)
-  q = q.replace("search:", "")
-  search(limit=sys.argv[2], q=q)
-
-if not m:
+  q = q.replace('search:', '')
+  num = sys.argv[2]
+  if num:
+    num = int(sys.argv[2])
+    print '' + str(num) + ' results coming up...'
+    print '------'
+    search(limit=sys.argv[2], q=q)
   lists()
+  sys.exit(1)
 
+# lists
+# @usage 
+# $ kippt lists 
 
+if len(sys.argv) == 2:
 
+  print 'Warily not, pity...'
+
+  q = sys.argv[1]
+
+  if q == 'lists':
+    lists()
+
+  sys.exit(1)
+
+#if not m:
+args = sys.argv
+if not args:
+  print 'usage: [--todir dir] logfile '
+  sys.exit(1)
 
