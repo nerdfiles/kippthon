@@ -69,19 +69,18 @@ if 'search:' in u[0] and l and int(l[0]) > 0:
   # @idea consider names: as interfaces to webapp/urls
   # @example $ merch:   # looks in a particular app or network of apps
 
-  if 'search' in q[0]:
-    q = q[0].replace('search:', '')
+  q = u[0].replace('search:', '')
+  q = q.replace(' ', '+')
+  num = int(l[0])
 
-    if q == '':
-      print 'For?'
-      sys.exit(1)
-
-    q = q.replace(' ', '+')
-    num = int(l[0])
-    print '' + str(num) + ' results coming up...'
-    print '------'
-    print search(limit=l[0], q=q)
+  if q[0] == '':
+    print 'For?'
     sys.exit(1)
+
+  print '' + str(num) + ' results coming up...'
+  print '------'
+  print search(limit=l[0], q=q)
+  sys.exit(1)
 
 # search
 
