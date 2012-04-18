@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# == IMPORTS ======================================= #
+# == IMPORTS =================================== #
 
 import pycurl
 from pprint import pprint
@@ -13,23 +13,22 @@ import sys
 import re
 from tools import *
 import config
-
 # buf = cStringIO.StringIO()
 
-# == LOCAL ======================================= #
+# == LOCAL ===================================== #
 
 try:
   from local_settings import *
 except ImportError:
   pass
 
-# == ARGS ======================================== #
+# == ARGS ====================================== #
 
 args = sys.argv
 u = sys.argv[1:] # @assume 'lists'
 l = sys.argv[2:] # limit
 
-# == KIPPT CLI =================================== #
+# == KIPPT CLI ================================= #
 # 
 # @usage
 #
@@ -39,11 +38,14 @@ if not u:
   print 'Note: See --help for usage details.'
   sys.exit(1)
 
-# == SEARCH ====================================== #
+
+# == SEARCH ==================================== #
 # 
 # @usage
 #
 # $ kippt search:[query] [num]
+
+# search with limit
 
 if 'search:' in u[0] and l and int(l[0]) > 0:
 
@@ -65,6 +67,8 @@ if 'search:' in u[0] and l and int(l[0]) > 0:
     print '------'
     print search(limit=l[0], q=q)
     sys.exit(1)
+
+# search
 
 if 'search:' in u[0]:
   q = sys.argv[1]
