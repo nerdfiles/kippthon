@@ -12,6 +12,8 @@ from urllib2 import *
 import sys
 import re
 from tools import *
+import config
+
 # buf = cStringIO.StringIO()
 
 # == LOCAL ======================================= #
@@ -21,22 +23,29 @@ try:
 except ImportError:
   pass
 
+# == ARGS ======================================== #
+
+args = sys.argv
 u = sys.argv[1:] # @assume 'lists'
 l = sys.argv[2:] # limit
 
-# == SEARCH ====================================== #
-#
-# @usage 
+# == KIPPT CLI =================================== #
 # 
-# $ kippt search:some+thought+of+yours
+# @usage
 #
+# $ kippt
 
-m = ''
+if not u:
+  print 'Note: See --help for usage details.'
+  sys.exit(1)
 
-if len(sys.argv) > 2:
-  q = sys.argv[1:]
-  #p = re.compile('search\:')
-  #m = p.match(q, 0)
+# == SEARCH ====================================== #
+# 
+# @usage
+#
+# $ kippt search:[query] [num]
+
+if 'search:' in u[0] and l and int(l[0]) > 0:
 
   # grab "search:" text
   #
@@ -57,7 +66,7 @@ if len(sys.argv) > 2:
     print search(limit=l[0], q=q)
     sys.exit(1)
 
-if len(sys.argv) > 1:
+if 'search:' in u[0]:
   q = sys.argv[1]
   if q.startswith('search:'):
     q = q.replace('search:','')
@@ -68,26 +77,38 @@ if len(sys.argv) > 1:
     print search(limit=10, q=q)
     sys.exit(1)
 
-# lists
-# @usage 
+# == LISTS ===================================== #
+#
+# @usage
+#
 # $ kippt lists [num]
 
-if 'lists' in u and l and l[0] > 0:
+if 'lists' in u[0] and l and l[0] > 0:
   print lists(l[0])
   sys.exit(1)
 
-# lists
-# @usage
-# $ kippt lists
-
-#if len(sys.argv) > 1:
-if 'lists' in u:
+if 'lists' in u[0]:
   print lists()
   sys.exit(1)
 
-#if not m:
-args = sys.argv
-if '--help' in args:
+# == VERSION =================================== #
+#
+# @usage
+#
+# $ kippt [--version|-v]
+
+if '--version' in args or '-v' in args:
+  print 'Kippt %s' % config.VERSION
+  sys.exit(1)
+
+
+# == HELP ====================================== #
+#
+# @usage
+#
+# $ kippt [--help|-h]
+
+if '--help' in args or '-h' in args:
   print ''' 
  -------------------------------------------------------------
 |                                                             |
@@ -115,4 +136,5 @@ if '--help' in args:
 |                                                             |
  --------------------------------------------------------------'''
   sys.exit(1)
+
 
