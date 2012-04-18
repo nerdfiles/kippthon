@@ -5,7 +5,10 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-  url(r'^kippt/', 'views.kippt'),
+  url(r'^kippt/lists/$', 'views.lists'),
+  url(r'^kippt/lists/(?P<limit>\d+)/$', 'views.lists'),
+  url(r'^kippt/search/(?P<q>[A-Za-z\+]*)/$', 'views.search'),
+  url(r'^kippt/search/(?P<q>[A-Za-z\+]*)/(?P<limit>\d+)/$', 'views.search'),
   url(r'^dashboard/', include(admin.site.urls)),
   url(r'^', include('cms.urls')),
 )

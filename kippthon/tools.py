@@ -24,7 +24,7 @@ except ImportError:
 
 ''' 
 
-  kippt search
+  kippt search cli
 
   search for kippt bookmarks
 
@@ -33,8 +33,8 @@ except ImportError:
 
 '''
 
-def search_cli(limit='5', q=''):
-  url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (limit, q,)
+def search_cli(limit=10, q=''):
+  url = 'https://kippt.com/api/search/clips/?limit=%s&q=%s' % (str(limit), q,)
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
   req.add_header('X-Kippt-API-Token', API_KEY)
@@ -70,7 +70,7 @@ def search_cli(limit='5', q=''):
 
 '''
 
-  kippt lists
+  kippt lists cli
 
   print lists from kippt
 
@@ -80,7 +80,7 @@ def search_cli(limit='5', q=''):
 '''
 
 def lists_cli(limit=10):
-  url = 'https://kippt.com/api/clips/?offset=0&limit='+str(limit)
+  url = 'https://kippt.com/api/clips/?offset=0&limit=%s' % str(limit)
   # provide @prop data for post
   req = urllib2.Request(url=url)
   req.add_header('X-Kippt-Username', USER)
