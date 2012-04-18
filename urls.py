@@ -5,8 +5,9 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^dashboard/', include(admin.site.urls)),
-    url(r'^', include('cms.urls')),
+  url(r'^kippt/', 'views.kippt'),
+  url(r'^dashboard/', include(admin.site.urls)),
+  url(r'^', include('cms.urls')),
 )
 
 if settings.DEBUG:
