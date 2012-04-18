@@ -5,7 +5,7 @@ We're assuming $ alias kippt='[path]/main.py' for the moment.
 
 ## Version
 
-0.0.1
+0.0.2
 
 ## @todo
 
