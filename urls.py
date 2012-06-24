@@ -14,9 +14,9 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
-    urlpatterns = patterns('',
-        url(r'^_assets/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-        url(r'', include('django.contrib.staticfiles.urls')),
-    ) + urlpatterns
+  urlpatterns = patterns('',
+    url(r'^_assets/(?P<path>.*)$', 'django.views.static.serve',
+    {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+    url(r'', include('django.contrib.staticfiles.urls')),
+  ) + urlpatterns
 
