@@ -10,6 +10,7 @@ import urllib
 import urllib2
 from urllib2 import *
 import sys
+import os
 import re
 from tools import *
 import config
@@ -54,6 +55,30 @@ if not u:
 |                                                     |
  -----------------------------------------------------
 '''
+  sys.exit(1)
+
+
+# == KIPPT POST ================================ #
+#
+# @date         08-12-2012
+# @author       nerdfiles
+#
+# @param        url (expects urls)
+# 
+# @usage
+# 
+# $ kippt up:[url]
+
+if 'up:' in u[0] and l:
+  u = u[0].replace('up:', '')
+  u = u.replace(' ', '+')
+  
+  if q[0] == '':
+    print 'Forgot already?'
+    sys.exit(1)
+    
+  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data '{"url": "" + u + "", "list": "/api/lists/1/"}' https://kippt.com/api/clips/')
+  # curl --user :password -X POST --data '{"url": "https://kippt.com", "list": "/api/lists/12/"}' https://kippt.com/api/clips/ 
   sys.exit(1)
 
 
