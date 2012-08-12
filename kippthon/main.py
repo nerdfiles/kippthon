@@ -77,7 +77,7 @@ if 'up:' in u[0] and l:
     print 'Forgot already?'
     sys.exit(1)
     
-  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data '{"url": "" + u + "", "list": "/api/lists/1/"}' https://kippt.com/api/clips/')
+  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "" + u + "", "list": "/api/lists/1/"}\' https://kippt.com/api/clips/')
   # curl --user :password -X POST --data '{"url": "https://kippt.com", "list": "/api/lists/12/"}' https://kippt.com/api/clips/ 
   sys.exit(1)
 
