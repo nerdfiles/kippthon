@@ -78,7 +78,8 @@ if 'up:' in u[0]:
     sys.exit(1)
     
   print 'Posting to Kippt: ' + u
-  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "' + u + '", "list": "/api/lists/0/"}\' https://kippt.com/api/clips/')
+  #os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "' + u + '", "list": "/api/lists/0/"}\' https://kippt.com/api/clips/')
+  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "' + u + '", "app_url": "/nerdfiles/design"}\' https://kippt.com/api/clips/')
   print '---'
   sys.exit(1)
 
