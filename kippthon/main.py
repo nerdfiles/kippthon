@@ -69,15 +69,16 @@ if not u:
 # 
 # $ kippt up:[url]
 
-if 'up:' in u[0] and l:
+if 'up:' in u[0]:
   u = u[0].replace('up:', '')
   u = u.replace(' ', '+')
   
-  if q[0] == '':
+  if u[0] == '':
     print 'Forgot already?'
     sys.exit(1)
     
-  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "' + u + '", "list": "/api/lists/1/"}\' https://kippt.com/api/clips/')
+  print 'Posting to Kippt: ' + u
+  os.system('curl --user ' + USER + ':' + PASSWORD + ' -X POST --data \'{"url": "' + u + '", "list": "/api/lists/0/"}\' https://kippt.com/api/clips/')
   # curl --user :password -X POST --data '{"url": "https://kippt.com", "list": "/api/lists/12/"}' https://kippt.com/api/clips/ 
   sys.exit(1)
 
